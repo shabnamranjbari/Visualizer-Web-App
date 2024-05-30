@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNN Visualization</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .back-button {
+            margin-top: 15px;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">KNN Visualization</h1>
+        <div class="description">
+            <p><strong>K-Nearest Neighbors (KNN)</strong> is a simple, supervised machine learning algorithm that can be used for both classification and regression tasks. The algorithm classifies new data points based on the majority class among the nearest K data points in the training set.</p>
+            <ul>
+                <li><strong>Number of Neighbors (K):</strong> The number of nearest neighbors to consider for classification.</li>
+                <li><strong>Number of Classes:</strong> The number of distinct classes in the dataset.</li>
+                <li><strong>Number of Data Points:</strong> The total number of data points to generate for the dataset.</li>
+            </ul>
+        </div>
+        <form action="/knn_visualization" method="get">
+            <div class="form-group">
+                <label for="k" class="form-label">Number of Neighbors (K):</label>
+                <input type="number" step="1" id="k" name="k" value="5" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="n_classes" class="form-label">Number of Classes:</label>
+                <input type="number" step="1" id="n_classes" name="n_classes" value="3" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="n_points" class="form-label">Number of Data Points:</label>
+                <input type="number" step="10" id="n_points" name="n_points" value="100" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Train</button>
+        </form>
+        <button class="btn btn-secondary btn-block back-button" onclick="window.location.href='/'">Back to Home</button>
+        <div class="text-center">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="KNN Visualization" class="img-fluid">
+        </div>
+       
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

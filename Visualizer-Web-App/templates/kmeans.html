@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMeans Clustering</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .back-button {
+            margin-top: 15px;
+        }
+        .plot-container {
+            margin-top: 20px;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">KMeans Clustering</h1>
+        <div class="description">
+            <p><strong>KMeans Clustering</strong> is an unsupervised machine learning algorithm used to partition a dataset into K distinct, non-overlapping subsets (clusters). It aims to minimize the variance within each cluster.</p>
+            <ul>
+                <li><strong>Number of Clusters:</strong> The number of clusters to form and the number of centroids to generate.</li>
+                <li><strong>Initialization Method:</strong> Method for initialization:
+                    <ul>
+                        <li><strong>k-means++:</strong> Selects initial cluster centers in a smart way to speed up convergence.</li>
+                        <li><strong>random:</strong> Selects initial cluster centers randomly.</li>
+                    </ul>
+                </li>
+                <li><strong>Number of Initializations:</strong> The number of times the k-means algorithm will be run with different centroid seeds.</li>
+                <li><strong>Maximum Iterations:</strong> Maximum number of iterations for a single run of the k-means algorithm.</li>
+                <li><strong>Algorithm:</strong> KMeans algorithm to use:
+                    <ul>
+                        <li><strong>lloyd:</strong> Standard algorithm.</li>
+                        <li><strong>elkan:</strong> Optimized algorithm using the triangle inequality.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <form action="/kmeans" method="get">
+            <div class="form-group">
+                <label for="n_clusters" class="form-label">Number of Clusters:</label>
+                <input type="number" id="n_clusters" name="n_clusters" value="3" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="init" class="form-label">Initialization Method:</label>
+                <select id="init" name="init" class="form-control">
+                    <option value="k-means++">k-means++</option>
+                    <option value="random">random</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="n_init" class="form-label">Number of Initializations:</label>
+                <input type="number" id="n_init" name="n_init" value="10" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="max_iter" class="form-label">Maximum Iterations:</label>
+                <input type="number" id="max_iter" name="max_iter" value="300" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="algorithm" class="form-label">Algorithm:</label>
+                <select id="algorithm" name="algorithm" class="form-control">
+                    <option value="lloyd">lloyd</option>
+                    <option value="elkan">elkan</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Train</button>
+        </form>
+        <button class="btn btn-secondary btn-block back-button" onclick="window.location.href='/'">Back to Home</button>
+        <div class="plot-container text-center">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="KMeans Clustering Plot" class="img-fluid">
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

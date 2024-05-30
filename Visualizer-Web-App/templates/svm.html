@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVM Visualization</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .back-button {
+            margin-top: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+        .plot-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">SVM Decision Boundary Visualization</h1>
+        <div class="description">
+            <p><strong>Support Vector Machine (SVM)</strong> is a powerful classification algorithm that finds the optimal hyperplane to separate different classes. The choice of kernel and parameters significantly affects the performance of the SVM.</p>
+            <ul>
+                <li><strong>Select Dataset:</strong> Choose between a linearly separable or nonlinearly separable dataset.</li>
+                <li><strong>Select Kernel:</strong> Determines the type of decision boundary:
+                    <ul>
+                        <li><strong>Linear:</strong> A straight line.</li>
+                        <li><strong>Radial Basis Function (RBF):</strong> A curved boundary suitable for non-linear data.</li>
+                        <li><strong>Polynomial:</strong> A polynomial boundary, controlled by the degree parameter.</li>
+                        <li><strong>Sigmoid:</strong> A sigmoid-shaped boundary.</li>
+                    </ul>
+                </li>
+                <li><strong>C (Regularization parameter):</strong> Controls the trade-off between achieving a low training error and a low testing error (overfitting).</li>
+                <li><strong>Gamma (Kernel coefficient):</strong> Affects the decision boundary for RBF, polynomial, and sigmoid kernels. Higher values make the decision boundary more complex.</li>
+                <li><strong>Degree:</strong> Applicable only for the polynomial kernel, it defines the degree of the polynomial used.</li>
+            </ul>
+        </div>
+        <form action="/svm" method="get">
+            <div class="form-group">
+                <label for="dataset" class="form-label">Select Dataset:</label>
+                <select id="dataset" name="dataset" class="form-control">
+                    <option value="linear_separable">Linearly Separable</option>
+                    <option value="nonlinear_separable">Nonlinearly Separable</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="kernel" class="form-label">Select Kernel:</label>
+                <select id="kernel" name="kernel" class="form-control">
+                    <option value="linear">Linear</option>
+                    <option value="rbf">Radial Basis Function (RBF)</option>
+                    <option value="poly">Polynomial</option>
+                    <option value="sigmoid">Sigmoid</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="C" class="form-label">C (Regularization parameter):</label>
+                <input type="number" step="0.1" id="C" name="C" value="1.0" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="gamma" class="form-label">Gamma (Kernel coefficient for RBF, poly, sigmoid):</label>
+                <select id="gamma" name="gamma" class="form-control">
+                    <option value="scale">Scale</option>
+                    <option value="auto">Auto</option>
+                    <option value="0.1">0.1</option>
+                    <option value="0.01">0.01</option>
+                    <option value="0.001">0.001</option>
+                    <option value="0.0001">0.0001</option>
+                    <!-- Add more gamma values as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="degree" class="form-label">Degree (Degree of the polynomial kernel):</label>
+                <input type="number" step="1" id="degree" name="degree" value="3" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Train</button>
+        </form>
+        <button class="btn btn-secondary btn-block back-button" onclick="window.location.href='/'">Back to Home</button>
+        <div class="plot-container text-center">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="SVM Decision Boundary" class="img-fluid">
+        </div>
+      
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
